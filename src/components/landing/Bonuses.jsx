@@ -21,7 +21,7 @@ export default function Bonuses() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {BONUSES.map((bono) => (
-            <div className="bono flex flex-col justify-between rounded-3xl bg-card/10 backdrop-blur-sm border border-white/10 p-6 shadow-soft" key={bono.title}>
+            <div className="bono flex flex-col justify-between rounded-3xl bg-card/10 backdrop-blur-sm border border-white/10 p-6 shadow-soft" style={{ marginInline: "20px" }} key={bono.title}>
               <div>
                 <div className="mb-4 overflow-hidden rounded-2xl bg-card/20">
                   <Image src={bono.img} alt={bono.alt} fittingType="fit" loading="lazy" className="w-full object-cover" style={{ height: "300px" }} />

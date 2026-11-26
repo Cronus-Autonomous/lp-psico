@@ -1,5 +1,5 @@
 /** Checkout configurável — troque pela URL de checkout definitiva quando disponível. */
-export const CHECKOUT_URL = "https://pay.hotmart.com/P108461874D?checkoutMode=10";
+export const CHECKOUT_URL = "https://pay.hotmart.com/U108633648K?checkoutMode=10";
 
 export const STEPS = [
   { n: "1", title: "Abre", text: "Entrás al MiniApp organizado por categoría, nivel o condición del paciente. Encontrás lo que buscás en segundos." },
@@ -132,8 +132,8 @@ export const BONUSES = [
   },
   {
     img: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795557854/mk_-_Atlas_de_Explora%C3%A7%C3%A3o_Cl%C3%ADnica_em_Azul_e_Dourado.png`,
-    alt: "Bônus 1: 250 Perguntas Clínicas que Ninguém Pode Ignorar",
-    title: "250 Perguntas Clínicas que Ninguém Pode Ignorar",
+    alt: "Bono 1: 250 preguntas clínicas que nadie puede ignorar",
+    title: "250 preguntas clínicas que nadie puede ignorar",
     text: "Su propósito es abrir espacios de conciencia, identificar conflictos internos y facilitar la comprensión de aquello que muchas veces permanece fuera del reconocimiento consciente.",
     value: "Vale $22",
   },
