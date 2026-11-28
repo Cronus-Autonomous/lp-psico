@@ -9,6 +9,7 @@ import Bonuses from "@/components/landing/Bonuses";
 import Offer from "@/components/landing/Offer";
 import Footer from "@/components/landing/Footer";
 import PurchaseNotifications from "@/components/landing/PurchaseNotifications";
+import Faq from "@/components/landing/Faq";
 
 export default function Home() {
   return (
@@ -32,7 +33,7 @@ export default function Home() {
       {/* <Objections /> */}
 
       <Offer />
-      {/* <Faq /> */}
+      <Faq />
       <Footer />
       <PurchaseNotifications />
     </div>

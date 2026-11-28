@@ -1,76 +1,98 @@
-import { FAQ } from "@/data/vital";
 
+import { FAQ } from "@/data/vital";
 import { useState } from "react";
 
-
 export default function Faq() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(0);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="faq-section">
-      <div className="wrap" style={{ maxWidth: 720, margin: "0 auto", padding: "40px 20px" }}>
-        <h3 style={{ textAlign: "center", marginBottom: "30px", fontSize: "2rem" }}>
-          Preguntas frecuentes
-        </h3>
-        
-        <div className="faq-list" style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <section id="faq" className="faq-section faq-v2">
+      <div className="wrap faq-container">
+
+        <div className="faq-header">
+          <span className="faq-eyebrow">
+            ¿TIENES DUDAS?
+          </span>
+
+          <h2>
+            Preguntas frecuentes
+          </h2>
+
+          <p>
+            Todo lo que necesitas saber antes de acceder
+            a tu colección clínica.
+          </p>
+        </div>
+
+        <div className="faq-list">
           {FAQ.map((item, index) => {
             const isOpen = openIndex === index;
+            const answerId = `faq-answer-${index}`;
+
             return (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`faq-item ${isOpen ? "open" : ""}`}
-                style={{
-                  border: "1px solid rgba(0,0,0,0.1)",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  transition: "all 0.3s ease",
-                  backgroundColor: "var(--bg-card, #fff)"
-                }}
               >
                 <button
+                  type="button"
+                  className="faq-question"
                   onClick={() => toggleAccordion(index)}
-                  style={{
-                    width: "100%",
-                    padding: "18px 20px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    textAlign: "left",
-                    fontWeight: "600",
-                    fontSize: "1.05rem",
-                    color: "black",
-                  }}
+                  aria-expanded={isOpen}
+                  aria-controls={answerId}
                 >
-                  <span style={{color: "inherit"}}>{item.q}</span>
-                  <span style={{ fontSize: "1.2rem", transition: "transform 0.3s", transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>
-                    +
+                  <span className="faq-question-text">
+                    {item.q}
+                  </span>
+
+                  <span
+                    className={`faq-icon ${isOpen ? "active" : ""}`}
+                    aria-hidden="true"
+                  >
+                    {isOpen ? "−" : "+"}
                   </span>
                 </button>
-                
-                {isOpen && (
-                  <div 
-                    style={{
-                      padding: "0 20px 20px 20px",
-                      color: "var(--text-muted, #555)",
-                      lineHeight: "1.5",
-                      fontSize: "0.95rem"
-                    }}
-                  >
-                    <p>{item.a}</p>
+
+                <div
+                  id={answerId}
+                  className="faq-answer-wrapper"
+                  hidden={!isOpen}
+                >
+                  <div className="faq-answer">
+                    {item.a}
                   </div>
-                )}
+                </div>
               </div>
             );
           })}
         </div>
+
+        <div className="faq-bottom">
+          <div className="faq-bottom-icon">✦</div>
+
+          <h3>
+            ¿Listo para profundizar tu conocimiento clínico?
+          </h3>
+
+          <p>
+            Accede ahora a los dos materiales principales
+            y recibe los 4 bonos exclusivos.
+          </p>
+
+          <a href="#comprar" className="faq-cta">
+            QUIERO MI COLECCIÓN
+            <span> → </span>
+          </a>
+
+          <span className="faq-bottom-note">
+            Acceso inmediato · Pago único · Garantía de 7 días
+          </span>
+        </div>
+
       </div>
     </section>
   );

@@ -95,7 +95,7 @@ export default function PurchaseNotifications({
       >
         <div className="purchase-toast-thumb">
             <img
-              src='https://res.cloudinary.com/xiupvhfs/image/upload/v1795567434/Inserir_um_t%C3%ADtulo-removebg-preview.png'
+              src='https://res.cloudinary.com/xiupvhfs/image/upload/v1795871318/Inserir_um_t%C3%ADtulo__3_-removebg-preview.png'
               alt="Vista del producto"
             />
         </div>
