@@ -1,35 +1,75 @@
 
-import { createElement, useRef } from "react";
 import CtaButton from "./CtaButton";
 
-
 export default function Hero() {
-  const videoRef = useRef(null);  
-
   return (
     <header className="hero">
       <div className="wrap hero-grid">
+
+        {/* TEXTO PRINCIPAL */}
         <div className="hero-copy">
-          <span className="pill" style={{ color: "#2b7351" }}>
+
+          <span
+            className="pill"
+            style={{ color: "#2b7351" }}
+          >
             COLECCIÓN CLÍNICA
           </span>
 
           <h1>
-            Mapa de Las 5 Heridas Emocionales y 60 Mecanismos De Defensa
+            Descifra las heridas emocionales y descubre
+            las defensas que las ocultan.
           </h1>
 
           <p className="sub sub-small">
-            Un completo kit de herramientas clínicas para identificar las heridas emocionales, reconocer las máscaras defensivas y comprender los mecanismos inconscientes que condicionan la personalidad y el comportamiento humano.
+            Una colección de herramientas clínicas para
+            profundizar en la comprensión de las heridas
+            emocionales y los mecanismos inconscientes del ego.
           </p>
+
+          {/* BENEFICIOS */}
+          <div className="hero-benefits">
+            <span>✓ 2 guías clínicas especializadas</span>
+            <span>✓ 4 bonos exclusivos incluidos</span>
+            <span>✓ Acceso digital inmediato</span>
+          </div>
+
+          {/* PRECIO */}
+          <div className="hero-price">
+            <span className="hero-price-label">
+              COLECCIÓN COMPLETA POR SOLO
+            </span>
+
+            <strong>US$ 9</strong>
+
+            <span className="hero-price-detail">
+              Pago único · Sin suscripciones
+            </span>
+          </div>
+
+          {/* CTA */}
+          <CtaButton sub="Acceso inmediato · Garantía de 7 días">
+            QUIERO MI COLECCIÓN AHORA
+          </CtaButton>
+
+          <p className="hero-security">
+            🔒 Pago seguro · Garantía de 7 días
+          </p>
+
         </div>
-        {createElement("img", {
-          src: "https://res.cloudinary.com/xiupvhfs/image/upload/v1795556911/Inserir_um_t%C3%ADtulo-Photoroom.png",
-          alt: "kit de herramientas clínicas para identificar las heridas emocionales",
-          className: "max-md:-mt-[100px]"
-        })}
-        <CtaButton sub="Acceso inmediato · Garantía de 7 días">
-          DESCARGAR AHORA
-        </CtaButton>
+
+        {/* IMAGEN DOS PRODUTOS */}
+        <div className="hero-visual">
+          <img
+            src="https://res.cloudinary.com/xiupvhfs/image/upload/v1795871318/Inserir_um_t%C3%ADtulo__3_-removebg-preview.png"
+            alt="Colección clínica: Mapa de las 5 Heridas Emocionales y 60 Mecanismos de Defensa"
+            className="hero-product-image"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+
       </div>
     </header>
   );

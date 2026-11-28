@@ -75,9 +75,11 @@ export const MINIAPP_SCREENS = [
 ];
 
 export const GALLERY = [
+  { src: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795873279/mk_-_60_Mecanismos_de_defensa_Freud.png`, alt: "caratula_60_Mecanismos_de_defensa_Freud" },
   { src: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795557537/Imagem_do_ChatGPT_24_de_nov._de_2026_18_45_40.png`, alt: "Ejercicio de movilidad reducida" },
   { src: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795557538/Imagem_do_ChatGPT_24_de_nov._de_2026_18_45_36.png`, alt: "Ficha de ejercicio sin equipamiento" },
   { src: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795557538/Imagem_do_ChatGPT_24_de_nov._de_2026_18_45_32.png`, alt: "Dinámica grupal con tarjetas" },
+  { src: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795873280/mk_-_Mapa_das_5_Feridas_Emocionais.png`, alt: "Mapa_de_las_5_heridas_Emocionales" },
   { src: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795557572/Cartaz_Cl%C3%ADnico__Ferida_da_Humilha%C3%A7%C3%A3o.png`, alt: "Dinámica grupal musical" },
   { src: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795557573/Guia_Cl%C3%ADnica_da_Ferida_do_Abandono.png`, alt: "Dinámica grupal musical" },
   { src: `https://res.cloudinary.com/xiupvhfs/image/upload/v1795557573/Herida_de_Injusticia__M%C3%A1scara_R%C3%ADgida.png`, alt: "Dinámica grupal musical" },

@@ -1,140 +1,143 @@
-import { useEffect, useRef, useState } from "react";
+
+import { useState } from "react";
 import { Image } from "@/components/ui/image";
 import { GALLERY } from "@/data/vital";
 import GalleryLightbox from "./GalleryLightbox";
 
-const TOTAL = GALLERY.length;
-
 export default function Gallery() {
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(null);
-  const lastAction = useRef(Date.now());
-  const downX = useRef(null);
-  const moved = useRef(false);
 
-  const go = (next) => {
-    setIndex(((next % TOTAL) + TOTAL) % TOTAL);
-    lastAction.current = Date.now();
+  const current = GALLERY[index];
+
+  if (!current) return null;
+
+  const selectImage = (k) => {
+    setIndex(k);
   };
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (!open && Date.now() - lastAction.current > 7000) {
-        setIndex((current) => (current + 1) % TOTAL);
-      }
-    }, 3200);
-    return () => clearInterval(id);
-  }, [open]);
-
-  const offset = (k) => {
-    let delta = k - index;
-    if (delta > TOTAL / 2) delta -= TOTAL;
-    if (delta < -TOTAL / 2) delta += TOTAL;
-    return delta;
-  };
-
-  const onPointerDown = (event) => {
-    downX.current = event.clientX;
-    moved.current = false;
-  };
-
-  const onPointerMove = (event) => {
-    if (downX.current !== null && Math.abs(event.clientX - downX.current) > 10) moved.current = true;
-  };
-
-  const onPointerUp = (event) => {
-    if (downX.current === null) return;
-    const delta = event.clientX - downX.current;
-    downX.current = null;
-    if (Math.abs(delta) > 40) go(index + (delta < 0 ? 1 : -1));
-  };
-
-  const onCardClick = (k, delta) => {
-    if (moved.current) return;
-    if (delta === 0) setOpen(GALLERY[k]);
-    else go(k);
-    lastAction.current = Date.now();
+  const openImage = () => {
+    setOpen(current);
   };
 
   return (
-    <section className="g3sec">
+    <section className="product-gallery">
       <div className="wrap">
-        <h2 className="sec-title g3t">Así se ve por dentro</h2>
-        <p className="sec-sub g3s">Material profesional, claro y listo para imprimir.</p>
 
-        <div className="g3car">
-          <div className="g3glow" aria-hidden="true" />
+        <div className="product-gallery-heading">
+          <h2 className="sec-title">
+            Así se ve por dentro
+          </h2>
+
+          <p className="sec-sub">
+            Explora nuestros materiales y descubre todo
+            lo que encontrarás en esta colección clínica.
+          </p>
+        </div>
+
+        <div className="product-gallery-layout">
+
+          {/* MINIATURAS */}
           <div
-            className="g3stage"
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={() => {
-              downX.current = null;
-            }}
+            className="product-thumbnails"
+            role="group"
+            aria-label="Galería de imágenes del producto"
           >
-            {GALLERY.map((item, k) => {
-              const delta = offset(k);
-              const abs = Math.abs(delta);
-              const style = {
-                transform: `translateX(${delta * 56}%) scale(${abs === 0 ? 1 : abs === 1 ? 0.8 : 0.64}) rotateY(${
-                  delta === 0 ? 0 : delta < 0 ? 22 : -22
-                }deg)`,
-                zIndex: 10 - abs,
-                opacity: abs > 2 ? 0 : 1,
-                pointerEvents: abs > 1 ? "none" : "auto",
-                filter:
-                  abs === 0
-                    ? "none"
-                    : `brightness(${abs === 1 ? 0.42 : 0.28}) blur(${abs === 1 ? 1.6 : 3}px) saturate(0.8)`,
-              };
-              return (
-                <div
-                  key={item.src}
-                  className={abs === 0 ? "g3cc on" : "g3cc"}
-                  style={style}
-                  onClick={() => onCardClick(k, delta)}
-                  role={abs === 0 ? "button" : undefined}
-                  tabIndex={abs === 0 ? 0 : -1}
-                  aria-label={abs === 0 ? `Ampliar: ${item.alt}` : undefined}
-                  onKeyDown={(event) => {
-                    if (abs === 0 && (event.key === "Enter" || event.key === " ")) {
-                      event.preventDefault();
-                      setOpen(GALLERY[k]);
-                    }
-                  }}
-                >
-                  <Image src={item.src} alt={item.alt} fittingType="fill" loading="eager" />
-                </div>
-              );
-            })}
+            {GALLERY.map((item, k) => (
+              <button
+                key={item.src}
+                type="button"
+                className={`product-thumb ${
+                  index === k ? "active" : ""
+                }`}
+                onClick={() => selectImage(k)}
+                aria-label={`Ver imagen ${k + 1}: ${item.alt}`}
+                aria-pressed={index === k}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fittingType="contain"
+                  loading={k === 0 ? "eager" : "lazy"}
+                />
+              </button>
+            ))}
           </div>
 
-          <div className="g3nav">
-            <button type="button" className="g3arr" aria-label="Página anterior" onClick={() => go(index - 1)}>
-              ‹
-            </button>
-            {TOTAL > 10 ? (
-              <span className="g3num">
-                <b>{index + 1}</b> / {TOTAL}
+          {/* IMAGEM PRINCIPAL */}
+          <div className="product-main-area">
+
+            <button
+              type="button"
+              className="product-main-image"
+              onClick={openImage}
+              aria-label={`Ampliar imagen: ${current.alt}`}
+            >
+              <Image
+                key={current.src}
+                src={current.src}
+                alt={current.alt}
+                fittingType="contain"
+                loading="eager"
+              />
+
+              <span className="product-zoom-hint">
+                <span>⌕</span>
+                Ampliar imagen
               </span>
-            ) : (
-              <div className="g3dots">
-                {GALLERY.map((item, k) => (
-                  <i key={item.src} className={k === index ? "on" : ""} />
-                ))}
-              </div>
-            )}
-            <button type="button" className="g3arr" aria-label="Página siguiente" onClick={() => go(index + 1)}>
-              ›
             </button>
-          </div>
 
-          <p className="g3hint">👆 Desliza para ver más · toca la ficha para ampliarla</p>
+            {/* NAVEGAÇÃO */}
+            <div className="product-gallery-controls">
+
+              <button
+                type="button"
+                className="product-gallery-arrow"
+                onClick={() =>
+                  selectImage(
+                    (index - 1 + GALLERY.length) %
+                    GALLERY.length
+                  )
+                }
+                aria-label="Imagen anterior"
+                disabled={GALLERY.length <= 1}
+              >
+                ‹
+              </button>
+
+              <span className="product-gallery-counter">
+                <strong>{index + 1}</strong>
+                {" / "}
+                {GALLERY.length}
+              </span>
+
+              <button
+                type="button"
+                className="product-gallery-arrow"
+                onClick={() =>
+                  selectImage((index + 1) % GALLERY.length)
+                }
+                aria-label="Imagen siguiente"
+                disabled={GALLERY.length <= 1}
+              >
+                ›
+              </button>
+
+            </div>
+
+            <p className="product-gallery-hint">
+              👆 Selecciona una muestra o haz clic en la
+              imagen para ampliar y explorar los detalles.
+            </p>
+
+          </div>
         </div>
       </div>
 
-      <GalleryLightbox item={open} onClose={() => setOpen(null)} />
+      <GalleryLightbox
+        item={open}
+        onClose={() => setOpen(null)}
+      />
     </section>
   );
 }
